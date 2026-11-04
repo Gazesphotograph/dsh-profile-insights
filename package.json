@@ -1,9 +1,9 @@
 {
   "name": "@local/dsh-profile-insights",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "private": true,
   "type": "module",
-  "description": "DSH profile dashboard with usage statistics, a year of token activity, and personal insights.",
+  "description": "Profile insights with token costs, budgets, timelines, per-session usage and models.dev pricing.",
   "exports": {
     ".": "./index.js",
     "./client": "./client.js",
@@ -18,6 +18,8 @@
     "locale/*.json",
     "icon.svg",
     "avatar.png",
+    "usage.js",
+    "prices.snapshot.json",
     "README.md",
     "CHANGELOG.md"
   ],
@@ -42,6 +44,6 @@
     "node": ">=22.15.0"
   },
   "scripts": {
-    "test": "node tests/profile-regression.mjs && node tests/profile-client-check.mjs && node tests/profile-avatar-host-check.mjs"
+    "test": "node tests/profile-regression.mjs && node tests/profile-client-check.mjs && node tests/profile-avatar-host-check.mjs && node tests/usage-check.mjs"
   }
 }

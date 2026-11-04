@@ -50,6 +50,7 @@
  */
 
 import { mkdir, open, readFile, rename, unlink } from 'node:fs/promises'
+import { createUsageStore, readSettingsBody, buildUsage } from './usage.js'
 import { createHash, randomUUID } from 'node:crypto'
 import { homedir } from 'node:os'
 import { join, resolve } from 'node:path'
@@ -250,8 +251,9 @@ export function skillNameOf(raw) {
  *   skills: Set<string>,
  * }} the folded figures.
  */
-export function foldSession(events, header) {
+export function foldSession(events, header, ownedFrom = 0) {
   const tokens = zeroBuckets()
+  const samples = []
   const days = new Map()
   const effort = new Map()
   const models = new Map()
@@ -278,8 +280,11 @@ export function foldSession(events, header) {
     return bucket
   }
 
-  for (const event of events) {
+  for (const [eventIndex, event] of events.entries()) {
     if (event === null || typeof event !== 'object') continue
+    // Forks inherit paid requests as context, not as fresh consumption. Keep
+    // routing/title headers so new branch requests still have the right model.
+    if (eventIndex < ownedFrom && event.type !== 'request/header' && event.type !== 'session/title') continue
     const data = event.data ?? {}
     switch (event.type) {
       case 'session/title': {
@@ -347,10 +352,16 @@ export function foldSession(events, header) {
           const previousDay = days.get(previous.day)
           if (previousDay !== undefined) previousDay.tokens -= bucketTotal(previous.buckets)
         }
-        const day = dayKey(event.time)
+        const slash = currentModel?.indexOf('/') ?? -1
+        const sample = { time: Number.isFinite(event.time) ? event.time : Number(header.createdAt) || 0,
+          provider: slash < 0 ? 'unknown' : currentModel.slice(0, slash),
+          model: slash < 0 ? 'unknown' : currentModel.slice(slash + 1), tokens: buckets }
+        const sampleIndex = previous?.sampleIndex ?? samples.length
+        samples[sampleIndex] = sample
+        const day = dayKey(sample.time)
         addBuckets(tokens, buckets)
         dayOf(event.time).tokens += bucketTotal(buckets)
-        last = { turn: data.turn, step: data.step, buckets, day }
+        last = { turn: data.turn, step: data.step, buckets, day, sampleIndex }
         break
       }
       case 'assistant/attempt': {
@@ -364,10 +375,16 @@ export function foldSession(events, header) {
           const previousDay = days.get(previous.day)
           if (previousDay !== undefined) previousDay.tokens -= bucketTotal(previous.buckets)
         }
-        const day = dayKey(event.time)
+        const slash = currentModel?.indexOf('/') ?? -1
+        const sample = { time: Number.isFinite(event.time) ? event.time : Number(header.createdAt) || 0,
+          provider: slash < 0 ? 'unknown' : currentModel.slice(0, slash),
+          model: slash < 0 ? 'unknown' : currentModel.slice(slash + 1), tokens: buckets }
+        const sampleIndex = previous?.sampleIndex ?? samples.length
+        samples[sampleIndex] = sample
+        const day = dayKey(sample.time)
         addBuckets(tokens, buckets)
         dayOf(event.time).tokens += bucketTotal(buckets)
-        last = { turn: data.turn, step: data.step, buckets, day }
+        last = { turn: data.turn, step: data.step, buckets, day, sampleIndex }
         break
       }
       default:
@@ -380,6 +397,7 @@ export function foldSession(events, header) {
     createdAt: Number(header.createdAt) || 0,
     title,
     tokens,
+    samples,
     turns,
     steps,
     days,
@@ -665,7 +683,7 @@ async function collectSkillTotal(ctx, cwd, timeoutMs) {
  * @param {typeof DEFAULTS} config resolved config.
  * @returns {Promise<object>} the `/stats` body without `ok`/`generatedAt`.
  */
-async function collect(ctx, config) {
+async function collect(ctx, config, usageStore) {
   const sessionQuery = ctx.sessionQuery
   const records = await sessionQuery.listSessions()
   const folded = []
@@ -678,7 +696,7 @@ async function collect(ctx, config) {
     try {
       const snapshot = await sessionQuery.readSession(header.id)
       const events = Array.isArray(snapshot?.events) ? snapshot.events : []
-      folded.push(foldSession(events, snapshot?.session ?? header))
+      folded.push(foldSession(events, snapshot?.session ?? header, Math.max(0, Number(snapshot?.inheritedEventCount) || 0)))
       const createdAt = Number(header.createdAt) || 0
       if (createdAt > newestCreatedAt) {
         newestCreatedAt = createdAt
@@ -696,7 +714,7 @@ async function collect(ctx, config) {
     collectSkillTotal(ctx, cwd, config.skillTimeoutMs),
   ])
 
-  return aggregate(folded, {
+  const body = aggregate(folded, {
     today: dayKey(Date.now()),
     activityDays: Math.max(7, Math.min(730, Number(config.activityDays) || DEFAULTS.activityDays)),
     topModels: Math.max(1, Number(config.topModels) || DEFAULTS.topModels),
@@ -705,6 +723,8 @@ async function collect(ctx, config) {
     profile,
     skippedSessions,
   })
+  body.usage = buildUsage(folded, await usageStore.snapshot(), dayKey)
+  return body
 }
 
 // ---------------------------------------------------------------------------
@@ -950,6 +970,7 @@ function failure(status, code, message) {
  */
 export function apply(ctx, rawConfig = {}) {
   const config = { ...DEFAULTS, ...(rawConfig ?? {}) }
+  const usageStore = createUsageStore(avatarDirectory(ctx))
   const cacheTtlMs = Math.max(0, Number(config.cacheTtlMs) || 0)
 
   /** @type {{at: number, body: object} | undefined} */
@@ -962,7 +983,7 @@ export function apply(ctx, rawConfig = {}) {
     if (inflight !== undefined) return inflight
     inflight = (async () => {
       try {
-        const body = await collect(ctx, config)
+        const body = await collect(ctx, config, usageStore)
         cache = { at: Date.now(), body }
         return body
       } finally {
@@ -1001,6 +1022,33 @@ export function apply(ctx, rawConfig = {}) {
   }
 
   const disposers = [
+    registerRoute({
+      path: `${ROUTE_PREFIX}/usage-settings`, methods: ['GET', 'PUT'], requestBody: 'buffered',
+      fetch: async (request) => {
+        try {
+          if (request.method === 'GET') return json(200, { ok: true, settings: (await usageStore.snapshot()).settings })
+          let value
+          try { value = await readSettingsBody(request) } catch { return failure(400, 'INVALID_SETTINGS', 'Check budget and custom price values.') }
+          await usageStore.save(value)
+          // Any ongoing collection may have read old settings. Wait before
+          // invalidating its result so it cannot repopulate the cache afterward.
+          await inflight?.catch(() => {})
+          cache = undefined
+          return json(200, { ok: true, settings: (await usageStore.snapshot()).settings })
+        } catch { return failure(500, 'SETTINGS_FAILED', 'Usage settings could not be saved or read.') }
+      },
+    }),
+    registerRoute({
+      path: `${ROUTE_PREFIX}/prices/refresh`, methods: ['POST'], requestBody: 'buffered',
+      fetch: async () => {
+        try {
+          await usageStore.sync()
+          await inflight?.catch(() => {})
+          cache = undefined
+          return json(200, { ok: true, pricing: (await usageStore.snapshot()).pricing })
+        } catch { return failure(502, 'PRICE_SYNC_FAILED', 'Price sync failed; the last saved catalog remains available.') }
+      },
+    }),
     registerRoute({
       path: `${ROUTE_PREFIX}/stats`,
       methods: ['GET', 'HEAD'],

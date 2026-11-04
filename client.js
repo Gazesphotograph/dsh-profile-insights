@@ -83,6 +83,82 @@ window.__ModuleLoader__.load({
       requestsUnit: '次',
       callsUnit: '次',
       totalsLine: '{sessions} 个会话 · {turns} 轮对话 · {steps} 个步骤',
+      costTitle: '成本与预算',
+      costIntro: '按当前单价估算（USD），历史用量也按当前价格重算；实际账单以服务商为准。',
+      costTotal: '累计估算成本',
+      costDay: '今日预算',
+      costMonth: '本月预算',
+      unpriced: '{count} 次用量无法定价',
+      costUnset: '未设置预算',
+      remaining: '剩余 {amount}',
+      budgetWarning: '接近预算',
+      budgetExceeded: '已超预算',
+      budgetSettings: '预算与价格设置',
+      dailyBudget: '每日预算（USD）',
+      monthlyBudget: '每月预算（USD）',
+      warningPercent: '提醒阈值（%）',
+      budgetHint: '预算留空表示不设置。提醒依据已定价的成本，不会中断会话；有未定价用量时实际成本可能更高。',
+      saveUsage: '保存设置',
+      savedUsage: '设置已保存',
+      savingUsage: '保存中…',
+      usageError: '操作失败，请检查数值或连接后重试。',
+      pricingSource: '价格来源',
+      priceUpdated: '更新于 {date}',
+      priceSync: '更新价格表',
+      priceSyncing: '更新中…',
+      stalePrices: '正在使用上次保存的价格',
+      priceModel: '模型 / 服务商',
+      priceInput: '输入',
+      priceOutput: '输出',
+      priceRead: '缓存读取',
+      priceWrite: '缓存写入',
+      priceHint: '自定义价格单位为 USD / 百万 Token。输入与输出必填；缓存价格未知可留空，明确免费请填 0。',
+      priceCustom: '自定义价',
+      priceCatalog: '服务商公开价',
+      priceEstimate: '原厂公开价估算',
+      priceUnknown: '尚无匹配价格',
+      priceAutomatic: '恢复自动价格',
+      priceOverride: '保存此模型单价',
+      priceEmpty: '没有模型用量',
+      priceUnavailable: '未知',
+      timelineTitle: 'Token 消耗时间线',
+      timelineIntro: '按用量结算时间归属；输入包含独立统计的缓存流量。点击柱形查看数值。',
+      range7: '近 7 天',
+      range30: '近 30 天',
+      range90: '近 90 天',
+      rangeAll: '全部时间',
+      groupDay: '按天',
+      groupWeek: '按周',
+      groupMonth: '按月',
+      chartTokens: 'Token',
+      chartCost: '估算成本',
+      allSessions: '全部会话',
+      sessionTitle: '各会话用量与成本',
+      sessionIntro: '完整历史用量；点击“查看时间线”筛选上方图表。',
+      sessionSearch: '搜索会话',
+      sortRecent: '最近使用',
+      sortTokens: 'Token 最多',
+      sortCost: '成本最高',
+      sessionName: '会话',
+      sessionTokens: 'Token 用量',
+      sessionCost: '估算成本',
+      sessionLast: '最后结算',
+      sessionView: '查看时间线',
+      sessionUnnamed: '未命名会话',
+      sessionsEmpty: '没有符合条件的会话',
+      previousPage: '上一页',
+      nextPage: '下一页',
+      pageIndicator: '第 {page} / {pages} 页 · {count} 个会话',
+      timelineEmpty: '此范围暂无用量',
+      costPartial: '已定价部分',
+      tokenSplit: '输入 {input} · 输出 {output} · 缓存 {cache}',
+      skippedUsage: '有 {count} 个会话读取失败，统计可能不完整。',
+      dateColumn: '时间',
+      requestCount: '{count} 次用量',
+      budgetNormal: '预算内',
+      costNotAvailable: '未定价',
+      priceEffective: '使用 {provider} / {model} 的当前价格；支持价格表中的长上下文阶梯价。',
+      priceEditor: '自定义模型单价',
     }
 
     const en = {
@@ -155,6 +231,82 @@ window.__ModuleLoader__.load({
       requestsUnit: '',
       callsUnit: '',
       totalsLine: '{sessions} sessions · {turns} turns · {steps} steps',
+      costTitle: 'Cost & budgets',
+      costIntro: 'Estimated in USD at current rates, including historical usage. Your provider’s invoice is authoritative.',
+      costTotal: 'Estimated total cost',
+      costDay: 'Daily budget',
+      costMonth: 'Monthly budget',
+      unpriced: '{count} usage samples unpriced',
+      costUnset: 'No budget set',
+      remaining: '{amount} remaining',
+      budgetWarning: 'Approaching budget',
+      budgetExceeded: 'Budget exceeded',
+      budgetSettings: 'Budget & pricing settings',
+      dailyBudget: 'Daily budget (USD)',
+      monthlyBudget: 'Monthly budget (USD)',
+      warningPercent: 'Warning threshold (%)',
+      budgetHint: 'Leave budgets blank to disable. Alerts use priced costs and do not stop sessions. Unpriced usage may add to the actual cost.',
+      saveUsage: 'Save settings',
+      savedUsage: 'Settings saved',
+      savingUsage: 'Saving…',
+      usageError: 'Could not complete this action. Check values or connection and retry.',
+      pricingSource: 'Pricing source',
+      priceUpdated: 'Updated {date}',
+      priceSync: 'Update price catalog',
+      priceSyncing: 'Updating…',
+      stalePrices: 'Using the last saved prices',
+      priceModel: 'Model / provider',
+      priceInput: 'Input',
+      priceOutput: 'Output',
+      priceRead: 'Cache read',
+      priceWrite: 'Cache write',
+      priceHint: 'Custom rates are USD per million tokens. Input and output are required. Leave unknown cache rates blank; enter 0 for explicitly free usage.',
+      priceCustom: 'Custom rate',
+      priceCatalog: 'Provider list price',
+      priceEstimate: 'Maker list price estimate',
+      priceUnknown: 'No matching price',
+      priceAutomatic: 'Restore automatic pricing',
+      priceOverride: 'Save model rates',
+      priceEmpty: 'No model usage',
+      priceUnavailable: 'Unknown',
+      timelineTitle: 'Token usage timeline',
+      timelineIntro: 'Attributed to usage settlement time; input includes separately counted cache traffic. Select a bar for values.',
+      range7: 'Last 7 days',
+      range30: 'Last 30 days',
+      range90: 'Last 90 days',
+      rangeAll: 'All time',
+      groupDay: 'Daily',
+      groupWeek: 'Weekly',
+      groupMonth: 'Monthly',
+      chartTokens: 'Tokens',
+      chartCost: 'Estimated cost',
+      allSessions: 'All sessions',
+      sessionTitle: 'Usage & cost by session',
+      sessionIntro: 'Full historical usage. Select “View timeline” to filter the chart above.',
+      sessionSearch: 'Search sessions',
+      sortRecent: 'Most recent',
+      sortTokens: 'Most tokens',
+      sortCost: 'Highest cost',
+      sessionName: 'Session',
+      sessionTokens: 'Tokens',
+      sessionCost: 'Estimated cost',
+      sessionLast: 'Last settlement',
+      sessionView: 'View timeline',
+      sessionUnnamed: 'Untitled session',
+      sessionsEmpty: 'No matching sessions',
+      previousPage: 'Previous',
+      nextPage: 'Next',
+      pageIndicator: 'Page {page} / {pages} · {count} sessions',
+      timelineEmpty: 'No usage in this range',
+      costPartial: 'Priced portion',
+      tokenSplit: 'Input {input} · output {output} · cache {cache}',
+      skippedUsage: '{count} sessions could not be read. Statistics may be incomplete.',
+      dateColumn: 'Date',
+      requestCount: '{count} usage samples',
+      budgetNormal: 'Within budget',
+      costNotAvailable: 'Unpriced',
+      priceEffective: 'Current rates from {provider} / {model}; long-context tiers from the catalog are included.',
+      priceEditor: 'Custom model rates',
     }
 
     // -----------------------------------------------------------------------
@@ -978,6 +1130,128 @@ window.__ModuleLoader__.load({
       )
     }
 
+
+    const USAGE_CSS = `
+      .pi-usage { display: flex; flex-direction: column; gap: 24px; min-width: 0; }
+      .pi-usage * { box-sizing: border-box; }
+      .pi-uHead { display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap; }
+      .pi-uTitle { font-size:16px;font-weight:500;margin:0 0 6px; }
+      .pi-uNote { color:var(--dsw-alias-label-tertiary);font-size:12px;line-height:1.7;margin:4px 0;overflow-wrap:anywhere; }
+      .pi-uGrid { display:grid;grid-template-columns:repeat(auto-fit,minmax(min(210px,100%),1fr));gap:12px;margin:20px 0; }
+      .pi-uMetric { padding:16px;border:1px solid var(--dsw-alias-border-l3);border-radius:var(--dsw-radius-md);min-width:0; }
+      .pi-uValue { font-size:24px;font-weight:500;line-height:1.6;font-variant-numeric:tabular-nums;overflow-wrap:anywhere; }
+      .pi-uControls { display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0; }
+      .pi-uControls label { display:flex;flex-direction:column;gap:6px;min-width:0;font-size:12px; }
+      .pi-usage select,.pi-usage input { min-width:0;max-width:100%;border:1px solid var(--dsw-alias-border-l3);border-radius:var(--dsw-radius-sm);padding:7px 10px;background:var(--dsw-alias-bg-layer-1);color:var(--dsw-alias-label-primary);font:inherit; }
+      .pi-usage select { text-overflow:ellipsis; }
+      .pi-uControls>select { max-width:280px; }
+      .pi-usage input[type=number] { width:150px; }
+      .pi-usage summary { cursor:pointer;font-size:13px;padding:8px 0; }
+      .pi-usage progress { display:block;accent-color:var(--dsw-alias-state-business-primary);width:100%;height:7px;margin:10px 0; }
+      .pi-uWarn { color:var(--dsw-alias-state-warn-primary); }
+      .pi-uError { color:var(--dsw-alias-state-error-primary); }
+      .pi-uTableWrap { overflow:auto;max-width:100%; }
+      .pi-uTable { width:100%;border-collapse:collapse;font-size:12px;text-align:left; }
+      .pi-uTable th { color:var(--dsw-alias-label-tertiary);font-weight:400;white-space:nowrap; }
+      .pi-uTable td,.pi-uTable th { padding:12px 10px;border-bottom:1px solid var(--dsw-alias-border-l3);vertical-align:top; }
+      .pi-uTable td:first-child { min-width:180px;max-width:340px;overflow-wrap:anywhere; }
+      .pi-uTable .pi-uNumber { white-space:nowrap;font-variant-numeric:tabular-nums; }
+      .pi-uTable .pi-btn { white-space:nowrap; }
+      .pi-uBars { display:flex;gap:3px;height:160px;align-items:stretch;min-width:100%;padding-top:14px;border-bottom:1px solid var(--dsw-alias-border-l3); }
+      .pi-uBar { flex:1;min-width:5px;padding:0;display:flex;align-items:flex-end;justify-content:stretch;border:0;background:transparent;cursor:pointer; }
+      .pi-uBar span { width:100%;min-height:2px;border-radius:3px 3px 0 0;background:var(--dsw-alias-state-business-primary);opacity:.65; }
+      .pi-uBar[aria-pressed=true] span,.pi-uBar:hover span { opacity:1; }
+      .pi-uAxis { display:flex;justify-content:space-between;color:var(--dsw-alias-label-tertiary);font-size:11px;margin:8px 0; }
+      .pi-uFooter { display:flex;justify-content:space-between;flex-wrap:wrap;align-items:center;gap:10px;margin-top:12px; }
+      .pi-uSelected { padding:12px 0;font-size:13px;line-height:1.8;min-height:48px; }
+      .pi-usage a { color:var(--dsw-alias-state-business-primary); }
+      .pi-usage button:focus-visible,.pi-usage select:focus-visible,.pi-usage input:focus-visible { outline:2px solid var(--dsw-alias-state-business-primary);outline-offset:2px; }
+      @media(max-width:520px) { .pi-usage .pi-card { padding:16px; } .pi-uControls>select { max-width:100%; } }
+    `
+    function usageMoney(value) { return new Intl.NumberFormat(undefined, { style:'currency',currency:'USD',minimumFractionDigits:2,maximumFractionDigits:4 }).format(Number(value)||0) }
+    const sourceLabel = (price,t) => t(price?.source === 'custom' ? 'priceCustom' : price?.source === 'catalog' ? 'priceCatalog' : price ? 'priceEstimate' : 'priceUnknown')
+    const usageCost = (row,t) => row.requests > 0 && row.unpriced === row.requests ? t('costNotAvailable') : `≈${usageMoney(row.cost)}${row.unpriced ? '+' : ''}`
+
+    function UsageDashboard({ usage, t, onReload, skipped }) {
+      const [draft,setDraft]=useState(null), [status,setStatus]=useState(null), [working,setWorking]=useState(false)
+      const [range,setRange]=useState('30'),[group,setGroup]=useState('day'),[measure,setMeasure]=useState('tokens'),[session,setSession]=useState('')
+      const [search,setSearch]=useState(''),[sort,setSort]=useState('recent'),[page,setPage]=useState(1),[selected,setSelected]=useState('')
+      const [modelKey,setModelKey]=useState(''),[rates,setRates]=useState(null)
+      const alive=useRef(true),operation=useRef(null),chart=useRef(null)
+      useEffect(()=>{alive.current=true;return()=>{alive.current=false;operation.current?.abort()}},[])
+      const models=usage?.models??[], sessions=usage?.sessions??[]
+      const model=models.find(m=>m.key===modelKey)??models[0]
+      const priceFields=['input','output','cache_read','cache_write']
+      const saved=usage?.settings??{daily:null,monthly:null,warningPercent:80,overrides:{}}
+      const values=draft??{daily:saved.daily??'',monthly:saved.monthly??'',warningPercent:saved.warningPercent}
+      const shownRates=rates??Object.fromEntries(priceFields.map(f=>[f,model?.price?.cost?.[f]??'']))
+      const change=(key,value)=>{setDraft({...values,[key]:value});setStatus(null)}
+      async function action(path,body,method='PUT') {
+        if(working)return
+        const controller=new AbortController();operation.current=controller
+        const timer=setTimeout(()=>controller.abort(),22000)
+        setWorking(true);setStatus(null)
+        try {
+          const r=await fetch(API+path,{method,credentials:'same-origin',signal:controller.signal,headers:{'content-type':'application/json'},body:JSON.stringify(body)})
+          if(!r.ok)throw new Error('request failed')
+          if(!alive.current)return
+          setDraft(null);setRates(null);setStatus('savedUsage')
+          await onReload(true)
+        } catch { if(alive.current)setStatus('usageError') }
+        finally {clearTimeout(timer);if(alive.current)setWorking(false);operation.current=null}
+      }
+      const saveBudget=event=>{event.preventDefault();void action('/usage-settings',{...saved,daily:values.daily===''?null:Number(values.daily),monthly:values.monthly===''?null:Number(values.monthly),warningPercent:Number(values.warningPercent)})}
+      const savePrice=event=>{event.preventDefault();if(!model)return;const cost=Object.fromEntries(priceFields.filter(f=>shownRates[f]!=='').map(f=>[f,Number(shownRates[f])]))
+        void action('/usage-settings',{...saved,overrides:{...saved.overrides,[model.key]:cost}})}
+      const resetPrice=()=>{if(!model)return;const overrides={...saved.overrides};delete overrides[model.key];void action('/usage-settings',{...saved,overrides})}
+      const points=useMemo(()=>{
+        const localKey=time=>{const d=new Date(time);if(group==='week')d.setDate(d.getDate()-(d.getDay()+6)%7);if(group==='month')d.setDate(1);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
+        const midnight=new Date();midnight.setHours(0,0,0,0)
+        const start=new Date(midnight);if(range!=='all')start.setDate(start.getDate()-Number(range)+1)
+        const entries=(usage?.timeline??[]).filter(r=>(!session||r.sessionId===session)&&(range==='all'||r.time>=start.getTime()))
+        if(range==='all'){if(!entries.length)return [];start.setTime(Math.min(...entries.map(r=>r.time)));start.setHours(0,0,0,0)}
+        const map=new Map()
+        const cursor=new Date(start)
+        // Data outside plausible calendar bounds must not cause an unbounded UI loop.
+        let count=0
+        while(cursor<=midnight&&count++<36600){const key=localKey(cursor);if(!map.has(key))map.set(key,{key,tokens:0,cost:0,requests:0,unpriced:0});cursor.setDate(cursor.getDate()+1)}
+        for(const r of entries){const key=localKey(r.time);const row=map.get(key);if(row)for(const f of ['tokens','cost','requests','unpriced'])row[f]+=r[f]}
+        return [...map.values()]
+      },[usage,range,group,session])
+      const max=Math.max(...points.map(p=>p[measure]),1)
+      const picked=points.find(p=>p.key===selected)??[...points].reverse().find(p=>p.requests)??points.at(-1)
+      const filtered=[...sessions].filter(s=>(s.title||s.id).toLowerCase().includes(search.toLowerCase())).sort((a,b)=>sort==='cost'?b.cost-a.cost:sort==='tokens'?b.tokens-a.tokens:b.lastAt-a.lastAt)
+      const pages=Math.max(1,Math.ceil(filtered.length/10)),current=Math.min(page,pages)
+      if(!usage)return null
+      const select=(label,value,change,options)=>h('select',{'aria-label':t(label),value,onChange:e=>{change(e.target.value);setSelected('')}},options.map(([key,text])=>h('option',{key,value:key},text)))
+      const partial=row=>row.unpriced?h('p',{className:'pi-uNote pi-uWarn'},fill(t('unpriced'),{count:row.unpriced})):null
+      const budgetCard=(key,label)=>{const b=usage.budgets[key];return h('div',{className:'pi-uMetric'},h('div',{className:'pi-uNote'},t(label)),h('div',{className:'pi-uValue'},usageCost(b,t)),
+        b.limit===null?h('p',{className:'pi-uNote'},t('costUnset')):h(React.Fragment,null,h('div',{className:'pi-uNote'},`/ ${usageMoney(b.limit)} · ${Math.round(b.ratio*100)}%`),h('progress',{max:1,value:Math.min(1,b.ratio),'aria-label':t(label)}),h('div',{className:b.state==='exceeded'?'pi-uError':b.state==='warning'?'pi-uWarn':'pi-uNote'},t(b.state==='exceeded'?'budgetExceeded':b.state==='warning'?'budgetWarning':'budgetNormal')),h('div',{className:'pi-uNote'},fill(t('remaining'),{amount:usageMoney(b.remaining)}))),partial(b))}
+      return h('div',{className:'pi-usage'},h('style',null,USAGE_CSS),
+        h('section',{className:'pi-card'},h('h2',{className:'pi-uTitle'},t('costTitle')),h('p',{className:'pi-uNote'},t('costIntro')),
+          skipped?h('p',{className:'pi-uNote pi-uWarn',role:'status'},fill(t('skippedUsage'),{count:skipped})):null,
+          h('div',{className:'pi-uGrid'},h('div',{className:'pi-uMetric'},h('div',{className:'pi-uNote'},t('costTotal')),h('div',{className:'pi-uValue'},usageCost(usage.totals,t)),h('p',{className:'pi-uNote'},fill(t('requestCount'),{count:usage.totals.requests})),partial(usage.totals)),budgetCard('daily','costDay'),budgetCard('monthly','costMonth')),
+          h('div',{className:'pi-uHead'},h('div',null,h('p',{className:'pi-uNote'},t('pricingSource'),' · ',h('a',{href:usage.pricing.url,target:'_blank',rel:'noreferrer'},'models.dev'),' · ',fill(t('priceUpdated'),{date:new Date(usage.pricing.updatedAt).toLocaleString()})),usage.pricing.stale||usage.pricing.lastError?h('p',{className:'pi-uNote pi-uWarn'},t('stalePrices')):null),h('button',{type:'button',className:'pi-btn',disabled:working,onClick:()=>{void action('/prices/refresh',{},'POST')}},t(working?'priceSyncing':'priceSync'))),
+          status?h('p',{className:status==='usageError'?'pi-uNote pi-uError':'pi-uNote',role:status==='usageError'?'alert':'status'},t(status)):null,
+          h('details',null,h('summary',null,t('budgetSettings')),
+            h('form',{onSubmit:saveBudget},h('div',{className:'pi-uControls'},...['daily','monthly','warningPercent'].map((key,i)=>h('label',{key},t(['dailyBudget','monthlyBudget','warningPercent'][i]),h('input',{type:'number',min:key==='warningPercent'?1:0.000001,max:key==='warningPercent'?100:1e9,step:'any',required:key==='warningPercent',value:values[key],onChange:e=>change(key,e.target.value)}))),h('button',{className:'pi-btn',disabled:working,type:'submit'},t(working?'savingUsage':'saveUsage'))),h('p',{className:'pi-uNote'},t('budgetHint'))),
+            h('h3',{className:'pi-uTitle',style:{marginTop:22}},t('priceEditor')),
+            h('form',{onSubmit:savePrice},h('div',{className:'pi-uControls'},select('priceModel',model?.key??'',v=>{setModelKey(v);setRates(null)},models.map(m=>[m.key,`${m.provider} / ${m.model}`]))),
+              model?h('p',{className:'pi-uNote'},sourceLabel(model.price,t),' · ',model.price?fill(t('priceEffective'),{provider:model.price.provider,model:model.price.id}):t('priceUnknown')):h('p',{className:'pi-uNote'},t('priceEmpty')),
+              h('div',{className:'pi-uControls'},...priceFields.map((key,i)=>h('label',{key},t(['priceInput','priceOutput','priceRead','priceWrite'][i]),h('input',{type:'number',min:0,max:1e9,step:'any',required:i<2,value:shownRates[key],placeholder:t('priceUnavailable'),onChange:e=>{setRates({...shownRates,[key]:e.target.value});setStatus(null)}})))),
+              h('p',{className:'pi-uNote'},t('priceHint')),h('div',{className:'pi-uControls'},h('button',{className:'pi-btn',disabled:working||!model,type:'submit'},t('priceOverride')),h('button',{className:'pi-btn',disabled:working||!saved.overrides[model?.key],type:'button',onClick:resetPrice},t('priceAutomatic')))))),
+        h('section',{className:'pi-card',ref:chart},h('h2',{className:'pi-uTitle'},t('timelineTitle')),h('p',{className:'pi-uNote'},t('timelineIntro')),
+          h('div',{className:'pi-uControls'},select('timelineTitle',range,setRange,[['7',t('range7')],['30',t('range30')],['90',t('range90')],['all',t('rangeAll')]]),select('dateColumn',group,setGroup,[['day',t('groupDay')],['week',t('groupWeek')],['month',t('groupMonth')]]),select('chartCost',measure,setMeasure,[['tokens',t('chartTokens')],['cost',t('chartCost')]]),select('sessionName',session,setSession,[['',t('allSessions')],...sessions.map(s=>[s.id,s.title||t('sessionUnnamed')])])),
+          h('div',{className:'pi-uTableWrap'},h('div',{className:'pi-uBars',role:'group','aria-label':t('timelineTitle')},points.map(p=>{const text=`${p.key} · ${formatTokens(p.tokens)} Token · ${usageCost(p,t)}${p.unpriced?' · '+fill(t('unpriced'),{count:p.unpriced}):''}`;return h('button',{key:p.key,type:'button',className:'pi-uBar',title:text,'aria-label':text,'aria-pressed':picked?.key===p.key,onClick:()=>setSelected(p.key)},h('span',{style:{height:`${Math.max(1,p[measure]/max*100)}%`}}))}))),
+          h('div',{className:'pi-uAxis'},h('span',null,points[0]?.key??'—'),h('span',null,points.at(-1)?.key??'—')),
+          picked?h('div',{className:'pi-uSelected','aria-live':'polite'},picked.key,' · ',formatTokens(picked.tokens),' Token · ',usageCost(picked,t),partial(picked)):h('p',{className:'pi-uNote'},t('timelineEmpty'))),
+        h('section',{className:'pi-card'},h('h2',{className:'pi-uTitle'},t('sessionTitle')),h('p',{className:'pi-uNote'},t('sessionIntro')),
+          h('div',{className:'pi-uControls'},h('input',{type:'search',placeholder:t('sessionSearch'),'aria-label':t('sessionSearch'),value:search,onChange:e=>{setSearch(e.target.value);setPage(1)}}),select('sessionTitle',sort,v=>{setSort(v);setPage(1)},[['recent',t('sortRecent')],['tokens',t('sortTokens')],['cost',t('sortCost')]])),
+          h('div',{className:'pi-uTableWrap'},h('table',{className:'pi-uTable'},h('thead',null,h('tr',null,...['sessionName','sessionTokens','sessionCost','sessionLast'].map(k=>h('th',{key:k,scope:'col'},t(k))))),h('tbody',null,filtered.slice((current-1)*10,current*10).map(s=>h('tr',{key:s.id},h('td',null,h('div',null,s.title||t('sessionUnnamed')),h('button',{type:'button',className:'pi-btn',style:{marginTop:8},onClick:()=>{setSession(s.id);setRange('all');setSelected('');chart.current?.scrollIntoView({block:'start',behavior:'auto'})}},t('sessionView'))),h('td',{className:'pi-uNumber'},formatTokens(s.tokens),h('p',{className:'pi-uNote'},fill(t('tokenSplit'),{input:formatTokens(s.input),output:formatTokens(s.output),cache:formatTokens((s.cacheRead||0)+(s.cacheWrite||0))}))),h('td',{className:'pi-uNumber'},usageCost(s,t),partial(s)),h('td',{className:'pi-uNumber'},s.lastAt?new Date(s.lastAt).toLocaleString():'—')))))),
+          !filtered.length?h('p',{className:'pi-uNote'},t('sessionsEmpty')):null,
+          h('div',{className:'pi-uFooter'},h('span',{className:'pi-uNote'},fill(t('pageIndicator'),{page:current,pages,count:filtered.length})),h('div',{className:'pi-uControls'},h('button',{type:'button',className:'pi-btn',disabled:current<=1,onClick:()=>setPage(current-1)},t('previousPage')),h('button',{type:'button',className:'pi-btn',disabled:current>=pages,onClick:()=>setPage(current+1)},t('nextPage'))))))
+    }
+
     function Page({ t }) {
       const [state, setState] = useState({ status: 'loading', data: null, error: null })
       const [busy, setBusy] = useState(false)
@@ -996,8 +1270,8 @@ window.__ModuleLoader__.load({
         }
       }, [])
 
-      const load = useCallback(async (force) => {
-        if (!alive.current || (force && activeRequest.current !== null)) return
+      const load = useCallback(async (force, replace = false) => {
+        if (!alive.current || (force && activeRequest.current !== null && !replace)) return
         activeRequest.current?.controller.abort()
         const controller = new AbortController()
         const request = { controller, avatarRevision: avatarRevision.current }
@@ -1054,7 +1328,11 @@ window.__ModuleLoader__.load({
         }
       }, [])
 
-      useEffect(() => { void load(false) }, [load])
+      useEffect(() => {
+        void load(false)
+        const timer = window.setInterval?.(() => { if (document.visibilityState !== 'hidden' && activeRequest.current === null) void load(false) }, 30_000)
+        return () => window.clearInterval?.(timer)
+      }, [load])
 
       const data = state.data
       const totals = data?.totals ?? {}
@@ -1176,6 +1454,7 @@ window.__ModuleLoader__.load({
               h('p', { className: 'pi-stateBody' }, t('emptyBody')),
             ),
           ),
+        h(UsageDashboard, { usage: data?.usage, t, onReload: () => load(true, true), skipped: data?.diagnostics?.skippedSessions }),
         h(Heatmap, { activity: data?.activity, mode, onMode: setMode, t, locale }),
         h(Insights, { insights: data?.insights, t }),
       )
