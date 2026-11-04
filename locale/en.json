@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Profile & Insights",
+    "description": "A sidebar profile page with your avatar and name, total token usage, peak usage, longest task, usage streaks, a year-long token activity heatmap switchable between daily, weekly, and cumulative, plus reasoning-effort and skill-exploration insights."
+  }
+}

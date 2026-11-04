@@ -1,0 +1,3 @@
+- insert:
+    - id: profile-insights
+      name: '@local/dsh-profile-insights'

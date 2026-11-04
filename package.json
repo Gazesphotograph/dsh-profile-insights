@@ -1,0 +1,47 @@
+{
+  "name": "@local/dsh-profile-insights",
+  "version": "1.0.1",
+  "private": true,
+  "type": "module",
+  "description": "DSH profile dashboard with usage statistics, a year of token activity, and personal insights.",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./package.json": "./package.json",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "avatar.png",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-layout",
+        "@deepseek-ai/dsh-client-ui-sidebar"
+      ]
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gazesphotograph/dsh-profile-insights.git"
+  },
+  "engines": {
+    "node": ">=22.15.0"
+  },
+  "scripts": {
+    "test": "node tests/profile-regression.mjs && node tests/profile-client-check.mjs && node tests/profile-avatar-host-check.mjs"
+  }
+}
