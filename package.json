@@ -1,6 +1,6 @@
 {
   "name": "@local/dsh-profile-insights",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "private": true,
   "type": "module",
   "description": "Profile insights with token costs, budgets, timelines, per-session usage and models.dev pricing.",
@@ -45,5 +45,9 @@
   },
   "scripts": {
     "test": "node tests/profile-regression.mjs && node tests/profile-client-check.mjs && node tests/profile-avatar-host-check.mjs && node tests/usage-check.mjs"
+  },
+  "dshCompatibility": {
+    "testedHarness": "0.2.2-rc.3",
+    "platform": "win32-x64"
   }
 }

@@ -2,9 +2,14 @@
 
 为 DeepSeek Harness 提供个人资料页、Token 活动热力图、成本与预算、消耗时间线、会话明细和自定义头像。
 
-插件：`@local/dsh-profile-insights` · 版本：**1.1.0**
+插件：`@local/dsh-profile-insights` · 版本：**1.1.1**
 
-适用版本：**DeepSeek Harness 0.2.1-rc.5**。
+适用版本：**DeepSeek Harness 0.2.2-rc.3**。
+
+## 1.1.1 更新（2026-11-13）
+
+- 验证 DeepSeek Harness 0.2.2-rc.3 的个人资料面板、统计接口、用量成本与时间线。
+- 更新兼容版本说明；保留现有统计、头像和预算行为，本版没有修改运行时代码。
 
 ## 功能与数据
 
